@@ -1,9 +1,995 @@
-Penggunaan Aplikasi Pendita
-Key Features:
-- ✅ Multi-platform support (Windows, macOS, Linux)
-- ✅ Multiple installer formats
-- ✅ Auto-update ready
-- ✅ Code signing ready
-- ✅ Custom NSIS script
-- ✅ macOS notarization ready
-- ✅ Linux desktop integration
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Penggunaan Pendita</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .toc {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .toc h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .toc ul {
+            list-style: none;
+        }
+
+        .toc li {
+            margin: 8px 0;
+        }
+
+        .toc a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .toc a:hover {
+            color: #667eea;
+        }
+
+        .section {
+            margin: 40px 0;
+            padding: 30px;
+            background: #fff;
+            border-radius: 10px;
+            border-left: 5px solid #8e44ad;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .section h2 {
+            color: #8e44ad;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+
+        .section h4 {
+            color: #34495e;
+            margin: 20px 0 10px 0;
+            font-size: 1.1em;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h4 {
+            color: #8e44ad;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #e8f5e8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .step h4 {
+            color: #27ae60;
+            margin-bottom: 10px;
+        }
+
+        .warning {
+            background: #fef5e7;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #f39c12;
+        }
+
+        .warning h4 {
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .tip {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .tip h4 {
+            color: #2196f3;
+            margin-bottom: 10px;
+        }
+
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .shortcut-table th,
+        .shortcut-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .shortcut-table th {
+            background: #f8f9fa;
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .shortcut-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .kbd {
+            background: #495057;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .file-types {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .file-type {
+            background: #667eea;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #e91e63;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #34495e;
+            color: white;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Panduan Penggunaan Pendita</h1>
+            <p>Aplikasi Pendidikan Terpadu untuk Pembelajaran Modern</p>
+        </div>
+
+        <div class="toc">
+            <h2>📋 Daftar Isi</h2>
+            <ul>
+                <li><a href="#pengenalan">1. Pengenalan Pendita</a></li>
+                <li><a href="#memulai">2. Memulai Menggunakan Pendita</a></li>
+                <li><a href="#navigasi">3. Navigasi Aplikasi</a></li>
+                <li><a href="#fitur-utama">4. Fitur-Fitur Utama</a></li>
+                <li><a href="#manajemen-file">5. Manajemen File</a></li>
+                <li><a href="#papan-tulis">6. Papan Tulis Digital</a></li>
+                <li><a href="#kalender">7. Kalender dan Penjadwalan</a></li>
+                <li><a href="#dashboard">8. Dashboard Kursus</a></li>
+                <li><a href="#shortcut">9. Pintasan Keyboard</a></li>
+                <li><a href="#troubleshooting">10. Mengatasi Masalah</a></li>
+                <li><a href="#tips">11. Tips dan Trik</a></li>
+            </ul>
+        </div>
+
+        <section id="pengenalan" class="section">
+            <h2><span class="icon">🎓</span>Pengenalan Pendita</h2>
+            <p>Pendita adalah aplikasi pendidikan terpadu yang dirancang khusus untuk mendukung proses pembelajaran modern. Aplikasi ini menggabungkan berbagai alat pembelajaran dalam satu platform yang mudah digunakan.</p>
+            
+            <h3>🎯 Tujuan Aplikasi</h3>
+            <ul>
+                <li>Memfasilitasi proses pembelajaran interaktif</li>
+                <li>Menyediakan alat manajemen file yang komprehensif</li>
+                <li>Memberikan platform papan tulis digital</li>
+                <li>Mengorganisir jadwal dan kalender pendidikan</li>
+                <li>Mendukung berbagai format file pembelajaran</li>
+            </ul>
+
+            <h3>✨ Keunggulan Pendita</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>🖊️ Papan Tulis Digital</h4>
+                    <p>Gambar, tulis, dan buat diagram dengan mudah menggunakan alat drawing yang lengkap.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📁 File Manager</h4>
+                    <p>Buka dan kelola berbagai jenis file termasuk PDF, video, audio, dan presentasi.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📅 Kalender Terintegrasi</h4>
+                    <p>Kelola jadwal pembelajaran dan kegiatan akademik dengan kalender yang interaktif.</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🎯 Dashboard Kursus</h4>
+                    <p>Pantau progress dan kelola semua kursus dari satu tempat yang terpusat.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="memulai" class="section">
+            <h2><span class="icon">🚀</span>Memulai Menggunakan Pendita</h2>
+            
+            <h3>📋 Persyaratan Sistem</h3>
+            <ul>
+                <li>Windows 10 atau lebih baru</li>
+                <li>RAM minimal 4GB (disarankan 8GB)</li>
+                <li>Ruang penyimpanan kosong minimal 2GB</li>
+                <li>Resolusi layar minimal 1366x768</li>
+            </ul>
+
+            <h3>🔧 Instalasi</h3>
+            <div class="step">
+                <h4>Langkah 1: Download</h4>
+                <p>Download file installer Pendita dari sumber resmi atau folder distribusi yang disediakan.</p>
+            </div>
+            
+            <div class="step">
+                <h4>Langkah 2: Ekstrak File</h4>
+                <p>Ekstrak file ZIP yang sudah didownload ke folder yang diinginkan (contoh: <code>C:\Pendita</code>).</p>
+            </div>
+            
+            <div class="step">
+                <h4>Langkah 3: Jalankan Aplikasi</h4>
+                <p>Double-click file <code>Pendita.exe</code> untuk menjalankan aplikasi.</p>
+            </div>
+
+            <div class="tip">
+                <h4>💡 Tips Instalasi</h4>
+                <p>Pastikan aplikasi dijalankan dengan hak administrator jika mengalami masalah permission. Buat shortcut di desktop untuk akses yang lebih mudah.</p>
+            </div>
+        </section>
+
+        <section id="navigasi" class="section">
+            <h2><span class="icon">🧭</span>Navigasi Aplikasi</h2>
+            
+            <h3>🏠 Halaman Utama</h3>
+            <p>Halaman utama adalah titik pusat aplikasi Pendita yang menyediakan akses cepat ke semua fitur utama.</p>
+            
+            <h4>Komponen Halaman Utama:</h4>
+            <ul>
+                <li><strong>Header:</strong> Menampilkan logo dan navigasi utama</li>
+                <li><strong>Quick Actions:</strong> Tombol akses cepat ke fitur populer</li>
+                <li><strong>Kalender:</strong> Tampilan kalender interaktif</li>
+                <li><strong>File Actions:</strong> Akses cepat untuk membuka file</li>
+            </ul>
+
+            <h3>📋 Menu Navigasi</h3>
+            <p>Aplikasi menggunakan sistem menu native Windows yang dapat diakses dari menu bar di bagian atas.</p>
+
+            <h4>Menu File:</h4>
+            <ul>
+                <li><strong>📁 Buka Berkas</strong> - Membuka file dari sistem</li>
+                <li><strong>📄 File PDF</strong> - Membuka file PDF secara spesifik</li>
+                <li><strong>🎵 File Audio</strong> - Membuka file audio/musik</li>
+                <li><strong>🎥 File Video</strong> - Membuka file video</li>
+                <li><strong>🖼️ File Gambar</strong> - Membuka file gambar/foto</li>
+                <li><strong>📝 File Dokumen</strong> - Membuka dokumen Word/teks</li>
+                <li><strong>📊 File Presentasi</strong> - Membuka presentasi PowerPoint</li>
+            </ul>
+
+            <h4>Menu Navigate:</h4>
+            <ul>
+                <li><strong>🏠 Home</strong> - Kembali ke halaman utama</li>
+                <li><strong>🖊️ Papan Tulis</strong> - Buka papan tulis digital</li>
+                <li><strong>📚 Dashboard Kursus</strong> - Akses dashboard pembelajaran</li>
+                <li><strong>📝 Ujian Online</strong> - Link ke platform ujian eksternal</li>
+            </ul>
+        </section>
+
+        <section id="fitur-utama" class="section">
+            <h2><span class="icon">⭐</span>Fitur-Fitur Utama</h2>
+            
+            <h3>🏠 Halaman Home</h3>
+            <p>Halaman utama yang menyediakan akses cepat ke semua fitur aplikasi.</p>
+            <ul>
+                <li>Quick actions untuk fitur populer</li>
+                <li>Kalender interaktif dengan navigasi bulan</li>
+                <li>Informasi tanggal and hari ini</li>
+                <li>Akses cepat ke berbagai jenis file</li>
+            </ul>
+
+            <h3>🖊️ Papan Tulis Digital</h3>
+            <p>Fitur papan tulis digital dengan berbagai alat gambar dan writing tools.</p>
+            <ul>
+                <li>Berbagai ukuran brush dan pen</li>
+                <li>Palette warna yang lengkap</li>
+                <li>Tools untuk menggambar shapes</li>
+                <li>Eraser dan clear canvas</li>
+                <li>Save dan load drawings</li>
+            </ul>
+
+            <h3>📚 Dashboard Kursus</h3>
+            <p>Pusat manajemen semua aktivitas pembelajaran.</p>
+            <ul>
+                <li>Overview statistik pembelajaran</li>
+                <li>Manajemen kursus aktif</li>
+                <li>Progress tracking</li>
+                <li>Quick access ke modul pembelajaran</li>
+            </ul>
+
+            <h3>📅 Sistem Kalender</h3>
+            <p>Kalender interaktif untuk manajemen jadwal dan planning.</p>
+            <ul>
+                <li>Navigasi antar bulan dengan tombol Prev/Next</li>
+                <li>Highlight hari ini dengan warna khusus</li>
+                <li>Diferensiasi hari Minggu (merah) dan Sabtu (orange)</li>
+                <li>Refresh manual dengan tombol refresh</li>
+            </ul>
+        </section>
+
+        <section id="manajemen-file" class="section">
+            <h2><span class="icon">📁</span>Manajemen File</h2>
+            
+            <h3>📂 Format File yang Didukung</h3>
+            
+            <h4>📄 Dokumen:</h4>
+            <div class="file-types">
+                <span class="file-type">PDF</span>
+                <span class="file-type">DOC</span>
+                <span class="file-type">DOCX</span>
+                <span class="file-type">TXT</span>
+                <span class="file-type">RTF</span>
+            </div>
+
+            <h4>🎥 Media:</h4>
+            <div class="file-types">
+                <span class="file-type">MP4</span>
+                <span class="file-type">AVI</span>
+                <span class="file-type">MKV</span>
+                <span class="file-type">MOV</span>
+                <span class="file-type">MP3</span>
+                <span class="file-type">WAV</span>
+                <span class="file-type">OGG</span>
+            </div>
+
+            <h4>🖼️ Gambar:</h4>
+            <div class="file-types">
+                <span class="file-type">JPG</span>
+                <span class="file-type">PNG</span>
+                <span class="file-type">GIF</span>
+                <span class="file-type">BMP</span>
+                <span class="file-type">SVG</span>
+            </div>
+
+            <h4>📊 Presentasi:</h4>
+            <div class="file-types">
+                <span class="file-type">PPT</span>
+                <span class="file-type">PPTX</span>
+                <span class="file-type">ODP</span>
+            </div>
+
+            <h3>🔧 Cara Membuka File</h3>
+            
+            <div class="step">
+                <h4>Metode 1: Menu File</h4>
+                <ol>
+                    <li>Klik menu <strong>File</strong> di menu bar</li>
+                    <li>Pilih jenis file yang ingin dibuka</li>
+                    <li>Browser dan pilih file dari dialog yang muncul</li>
+                    <li>Klik <strong>Open</strong> untuk membuka file</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <h4>Metode 2: Quick Actions</h4>
+                <ol>
+                    <li>Dari halaman Home, scroll ke section file actions</li>
+                    <li>Klik tombol sesuai jenis file yang diinginkan</li>
+                    <li>Pilih file dari file browser</li>
+                    <li>File akan terbuka di window viewer yang baru</li>
+                </ol>
+            </div>
+
+            <h3>👁️ File Viewer</h3>
+            <p>Pendita menyediakan built-in viewer untuk berbagai jenis file:</p>
+            <ul>
+                <li><strong>PDF Viewer:</strong> Menggunakan PDF.js untuk tampilan PDF yang optimal</li>
+                <li><strong>Image Viewer:</strong> Mendukung zoom dan pan untuk gambar</li>
+                <li><strong>Video Player:</strong> Built-in HTML5 video player dengan controls</li>
+                <li><strong>Audio Player:</strong> Simple audio player dengan playlist support</li>
+                <li><strong>Document Viewer:</strong> Basic preview untuk dokumen teks</li>
+            </ul>
+
+            <div class="warning">
+                <h4>⚠️ Catatan Penting</h4>
+                <p>File PowerPoint (.ppt/.pptx) akan dibuka menggunakan aplikasi eksternal default sistem. Pastikan Microsoft PowerPoint atau aplikasi kompatible sudah terinstall.</p>
+            </div>
+        </section>
+
+        <section id="papan-tulis" class="section">
+            <h2><span class="icon">🖊️</span>Papan Tulis Digital</h2>
+            
+            <h3>🎨 Fitur Papan Tulis</h3>
+            <p>Papan tulis digital Pendita मenjadi platform untuk menulis, menggambar, dan membuat diagram secara interaktif.</p>
+
+            <h4>🖌️ Alat Drawing:</h4>
+            <ul>
+                <li><strong>Pen Tool:</strong> Untuk menulis dan menggambar bebas</li>
+                <li><strong>Brush:</strong> Berbagai ukuran untuk efek artistik</li>
+                <li><strong>Line Tool:</strong> Membuat garis lurus</li>
+                <li><strong>Rectangle:</strong> Menggambar persegi atau persegi panjang</li>
+                <li><strong>Circle:</strong> Membuat lingkaran atau elips</li>
+                <li><strong>Eraser:</strong> Menghapus bagian tertentu</li>
+            </ul>
+
+            <h4>🎨 Kustomisasi:</h4>
+            <ul>
+                <li><strong>Color Picker:</strong> Palette warna lengkap</li>
+                <li><strong>Brush Size:</strong> Pengaturan ketebalan garis</li>
+                <li><strong>Opacity:</strong> Pengaturan transparansi</li>
+                <li><strong>Layer Management:</strong> Bekerja dengan multiple layers</li>
+            </ul>
+
+            <h3>💾 Menyimpan dan Memuat</h3>
+            
+            <div class="step">
+                <h4>Menyimpan Gambar:</h4>
+                <ol>
+                    <li>Selesaikan drawing di papan tulis</li>
+                    <li>Klik tombol <strong>Save</strong> atau gunakan Ctrl+S</li>
+                    <li>Pilih lokasi dan nama file</li>
+                    <li>Pilih format file (PNG/JPG/SVG)</li>
+                </ol>
+            </div>
+
+            <div class="step">
+                <h4>Memuat Gambar:</h4>
+                <ol>
+                    <li>Klik tombol <strong>Load</strong> atau gunakan Ctrl+O</li>
+                    <li>Browse dan pilih file gambar</li>
+                    <li>Gambar akan dimuat ke canvas</li>
+                    <li>Lanjutkan editing sesuai kebutuhan</li>
+                </ol>
+            </div>
+
+            <h3>⌨️ Keyboard Controls</h3>
+            <table class="shortcut-table">
+                <tr>
+                    <th>Fungsi</th>
+                    <th>Shortcut</th>
+                </tr>
+                <tr>
+                    <td>Buka Papan Tulis</td>
+                    <td><span class="kbd">Ctrl+2</span></td>
+                </tr>
+                <tr>
+                    <td>Save Drawing</td>
+                    <td><span class="kbd">Ctrl+S</span></td>
+                </tr>
+                <tr>
+                    <td>Load Image</td>
+                    <td><span class="kbd">Ctrl+O</span></td>
+                </tr>
+                <tr>
+                    <td>Clear Canvas</td>
+                    <td><span class="kbd">Ctrl+Del</span></td>
+                </tr>
+                <tr>
+                    <td>Undo</td>
+                    <td><span class="kbd">Ctrl+Z</span></td>
+                </tr>
+                <tr>
+                    <td>Redo</td>
+                    <td><span class="kbd">Ctrl+Y</span></td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="kalender" class="section">
+            <h2><span class="icon">📅</span>Kalender dan Penjadwalan</h2>
+            
+            <h3>📆 Fitur Kalender</h3>
+            <p>Kalender Pendita menyediakan interface yang user-friendly untuk manajemen jadwal dan timeline pembelajaran.</p>
+
+            <h4>🗓️ Tampilan Kalender:</h4>
+            <ul>
+                <li><strong>View Bulanan:</strong> Tampilan grid standar dengan semua tanggal</li>
+                <li><strong>Navigasi Bulan:</strong> Tombol Prev/Next untuk berpindah bulan</li>
+                <li><strong>Highlight Hari Ini:</strong> Tanggal hari ini ditandai dengan warna khusus</li>
+                <li><strong>Weekend Highlighting:</strong> Sabtu (orange) dan Minggu (merah)</li>
+            </ul>
+
+            <h4>🎯 Interaksi Kalender:</h4>
+            <ul>
+                <li>Klik tanggal untuk melihat detail hari</li>
+                <li>Hover effect untuk preview tanggal</li>
+                <li>Quick navigation dengan click pada bulan/tahun</li>
+            </ul>
+
+            <h3>🔄 Refresh dan Troubleshooting</h3>
+            
+            <div class="tip">
+                <h4>💡 Jika Kalender Tidak Muncul</h4>
+                <ol>
+                    <li>Klik tombol <strong>🔄 Refresh Kalender</strong> di bawah kalender</li>
+                    <li>Refresh halaman dengan F5</li>
+                    <li>Navigasi ke halaman lain dan kembali ke Home</li>
+                    <li>Restart aplikasi jika masalah persisten</li>
+                </ol>
+            </div>
+
+            <h3>📋 Tips Penggunaan Kalender</h3>
+            <ul>
+                <li>Gunakan kalender untuk planning timeline pembelajaran</li>
+                <li>Perhatikan highlight warna untuk membedakan hari kerja dan libur</li>
+                <li>Manfaatkan navigasi cepat untuk berpindah antar bulan</li>
+                <li>Gunakan display "Hari ini" untuk orientasi waktu</li>
+            </ul>
+        </section>
+
+        <section id="dashboard" class="section">
+            <h2><span class="icon">📊</span>Dashboard Kursus</h2>
+            
+            <h3>🎯 Overview Dashboard</h3>
+            <p>Dashboard kursus adalah pusat kendali untuk semua aktivitas pembelajaran di Pendita.</p>
+
+            <h4>📈 Statistik dan Metrics:</h4>
+            <ul>
+                <li><strong>Total Students:</strong> Jumlah siswa terdaftar</li>
+                <li><strong>Active Courses:</strong> Kursus yang sedang berjalan</li>
+                <li><strong>Completed:</strong> Progress penyelesaian</li>
+                <li><strong>Performance Metrics:</strong> Dashboard kinerja pembelajaran</li>
+            </ul>
+
+            <h3>📚 Manajemen Kursus</h3>
+            <p>Interface untuk mengelola semua aspek kursus dan pembelajaran:</p>
+            
+            <h4>📋 Menu Managemen:</h4>
+            <ul>
+                <li><strong>Manage Courses:</strong> Kelola daftar dan konten kursus</li>
+                <li><strong>Kelola Peserta:</strong> Management data peserta/siswa</li>
+                <li><strong>Kelola Instruktur:</strong> Management data pengajar</li>
+                <li><strong>Kelola Materi:</strong> Upload dan organitasi materi pembelajaran</li>
+                <li><strong>Kelola Pertemuan:</strong> Scheduling meeting dan classroom sessions</li>
+                <li><strong>Kelola Tugas:</strong> Assignment management dan submission</li>
+                <li><strong>Kelola Pendaftaran:</strong> Registration dan enrollment management</li>
+            </ul>
+
+            <h3>📊 Fitur Assessment</h3>
+            <ul>
+                <li><strong>Presensi:</strong> Attendance tracking dan reporting</li>
+                <li><strong>Bulk Presensi:</strong> Mass attendance recording</li>
+                <li><strong>Nilai Mingguan:</strong> Weekly grading system</li>
+                <li><strong>Bulk Nilai:</strong> Batch grading tools</li>
+                <li><strong>Nilai Akhir:</strong> Final grade calculation</li>
+            </ul>
+
+            <h3>📈 Reporting dan Analytics</h3>
+            <ul>
+                <li><strong>Laporan Presensi:</strong> Attendance reports</li>
+                <li><strong>Laporan Nilai Mingguan:</strong> Weekly grade reports</li>
+                <li><strong>Laporan Nilai Akhir:</strong> Final grade reports</li>
+                <li><strong>Jadwal Mengajar:</strong> Teaching schedule overview</li>
+            </ul>
+        </section>
+
+        <section id="shortcut" class="section">
+            <h2><span class="icon">⌨️</span>Pintasan Keyboard</h2>
+            
+            <h3>🚀 Shortcut Navigasi</h3>
+            <table class="shortcut-table">
+                <tr>
+                    <th>Fungsi</th>
+                    <th>Shortcut</th>
+                    <th>Keterangan</th>
+                </tr>
+                <tr>
+                    <td>Home Page</td>
+                    <td><span class="kbd">Ctrl+1</span></td>
+                    <td>Kembali ke halaman utama</td>
+                </tr>
+                <tr>
+                    <td>Papan Tulis</td>
+                    <td><span class="kbd">Ctrl+2</span></td>
+                    <td>Buka papan tulis digital</td>
+                </tr>
+                <tr>
+                    <td>Dashboard Kursus</td>
+                    <td><span class="kbd">Ctrl+3</span></td>
+                    <td>Akses dashboard pembelajaran</td>
+                </tr>
+            </table>
+
+            <h3>📁 Shortcut File Operations</h3>
+            <table class="shortcut-table">
+                <tr>
+                    <th>Fungsi</th>
+                    <th>Shortcut</th>
+                    <th>Keterangan</th>
+                </tr>
+                <tr>
+                    <td>Buka File</td>
+                    <td><span class="kbd">Ctrl+O</span></td>
+                    <td>Open file dialog</td>
+                </tr>
+                <tr>
+                    <td>Keluar Aplikasi</td>
+                    <td><span class="kbd">Ctrl+Q</span></td>
+                    <td>Tutup aplikasi Pendita</td>
+                </tr>
+                <tr>
+                    <td>Tutup Window</td>
+                    <td><span class="kbd">Ctrl+W</span></td>
+                    <td>Tutup window aktif</td>
+                </tr>
+            </table>
+
+            <h3>🖼️ Shortcut Window Management</h3>
+            <table class="shortcut-table">
+                <tr>
+                    <th>Fungsi</th>
+                    <th>Shortcut</th>
+                    <th>Keterangan</th>
+                </tr>
+                <tr>
+                    <td>Maximize Window</td>
+                    <td><span class="kbd">Ctrl+Shift+M</span></td>
+                    <td>Maximize/restore window</td>
+                </tr>
+                <tr>
+                    <td>Toggle Fullscreen</td>
+                    <td><span class="kbd">F11</span></td>
+                    <td>Masuk/keluar fullscreen</td>
+                </tr>
+                <tr>
+                    <td>Keluar Fullscreen</td>
+                    <td><span class="kbd">ESC</span></td>
+                    <td>Keluar dari mode fullscreen</td>
+                </tr>
+            </table>
+
+            <h3>🎨 Shortcut Papan Tulis</h3>
+            <table class="shortcut-table">
+                <tr>
+                    <th>Fungsi</th>
+                    <th>Shortcut</th>
+                    <th>Keterangan</th>
+                </tr>
+                <tr>
+                    <td>Save Drawing</td>
+                    <td><span class="kbd">Ctrl+S</span></td>
+                    <td>Simpan gambar/drawing</td>
+                </tr>
+                <tr>
+                    <td>Undo</td>
+                    <td><span class="kbd">Ctrl+Z</span></td>
+                    <td>Batalkan aksi terakhir</td>
+                </tr>
+                <tr>
+                    <td>Redo</td>
+                    <td><span class="kbd">Ctrl+Y</span></td>
+                    <td>Ulangi aksi yang dibatalkan</td>
+                </tr>
+                <tr>
+                    <td>Clear Canvas</td>
+                    <td><span class="kbd">Ctrl+Del</span></td>
+                    <td>Bersihkan seluruh canvas</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="troubleshooting" class="section">
+            <h2><span class="icon">🔧</span>Mengatasi Masalah</h2>
+            
+            <h3>❓ Masalah Umum dan Solusi</h3>
+            
+            <h4>🚫 Aplikasi Tidak Bisa Dibuka</h4>
+            <div class="warning">
+                <h4>Gejala:</h4>
+                <p>Double-click Pendita.exe tidak menjalankan aplikasi atau muncul error message.</p>
+            </div>
+            <div class="tip">
+                <h4>Solusi:</h4>
+                <ol>
+                    <li>Pastikan menjalankan sebagai Administrator</li>
+                    <li>Check apakah semua file aplikasi lengkap (tidak corrupt)</li>
+                    <li>Disable temporary antivirus yang mungkin blocking</li>
+                    <li>Re-extract file ZIP jika diperlukan</li>
+                    <li>Check system compatibility (Windows 10+)</li>
+                </ol>
+            </div>
+
+            <h4>📁 File Tidak Bisa Dibuka</h4>
+            <div class="warning">
+                <h4>Gejala:</h4>
+                <p>File dialog muncul error atau file terpilih tidak bisa ditampilkan.</p>
+            </div>
+            <div class="tip">
+                <h4>Solusi:</h4>
+                <ol>
+                    <li>Pastikan file tidak corrupt atau terkunci</li>
+                    <li>Check format file didukung oleh Pendita</li>
+                    <li>Pastikan file tidak sedang digunakan aplikasi lain</li>
+                    <li>Try pindahkan file ke lokasi lain</li>
+                    <li>Check permission file (tidak read-only)</li>
+                </ol>
+            </div>
+
+            <h4>📅 Kalender Tidak Muncul</h4>
+            <div class="warning">
+                <h4>Gejala:</h4>
+                <p>Area kalender kosong atau tidak menampilkan tanggal.</p>
+            </div>
+            <div class="tip">
+                <h4>Solusi:</h4>
+                <ol>
+                    <li>Klik tombol "🔄 Refresh Kalender"</li>
+                    <li>Navigate ke halaman lain dan kembali ke Home</li>
+                    <li>Refresh browser dengan F5 (jika diperlukan)</li>
+                    <li>Restart aplikasi Pendita</li>
+                    <li>Check system date/time settings</li>
+                </ol>
+            </div>
+
+            <h4>🖊️ Papan Tulis Lag atau Tidak Responsif</h4>
+            <div class="warning">
+                <h4>Gejala:</h4>
+                <p>Drawing tools lambat merespon atau hasil gambar tidak smooth.</p>
+            </div>
+            <div class="tip">
+                <h4>Solusi:</h4>
+                <ol>
+                    <li>Reduce brush size jika terlalu besar</li>
+                    <li>Clear browser cache jika aplikasi web-based</li>
+                    <li>Close aplikasi lain yang menggunakan RAM berlebih</li>
+                    <li>Check hardware acceleration settings</li>
+                    <li>Update graphics drivers</li>
+                </ol>
+            </div>
+
+            <h4>💾 File Tidak Bisa Disimpan</h4>
+            <div class="warning">
+                <h4>Gejala:</h4>
+                <p>Save dialog error atau file tidak tersimpan di lokasi yang dipilih.</p>
+            </div>
+            <div class="tip">
+                <h4>Solusi:</h4>
+                <ol>
+                    <li>Check permission folder tujuan (not read-only)</li>
+                    <li>Pastikan ruang storage mencukupi</li>
+                    <li>Gunakan path yang lebih pendek</li>
+                    <li>Avoid special characters di nama file</li>
+                    <li>Try save ke location lain (Desktop/Documents)</li>
+                </ol>
+            </div>
+
+            <h3>🆘 Bantuan Lebih Lanjut</h3>
+            <div class="tip">
+                <h4>Jika masalah persisten:</h4>
+                <ol>
+                    <li>Screenshot error message yang muncul</li>
+                    <li>Note down langkah-langkah yang menyebabkan error</li>
+                    <li>Check Windows Event Viewer untuk error details</li>
+                    <li>Hubungi developer atau support team</li>
+                    <li>Consider reinstall aplikasi sebagai last resort</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="tips" class="section">
+            <h2><span class="icon">💡</span>Tips dan Trik</h2>
+            
+            <h3>🚀 Tips Produktivitas</h3>
+            
+            <div class="tip">
+                <h4>🔥 Workflow Optimization</h4>
+                <ul>
+                    <li>Gunakan keyboard shortcuts untuk navigasi cepat</li>
+                    <li>Organize files dalam folder struktur yang jelas</li>
+                    <li>Manfaatkan kalender untuk planning session pembelajaran</li>
+                    <li>Save frequently used files di lokasi yang mudah diakses</li>
+                    <li>Use meaningful naming convention untuk saved drawings</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <h4>🎨 Tips Papan Tulis</h4>
+                <ul>
+                    <li>Start dengan brush size kecil untuk detail work</li>
+                    <li>Use layers untuk kompleks drawings</li>
+                    <li>Save progress secara berkala (Ctrl+S)</li>
+                    <li>Experiment dengan opacity untuk shading effects</li>
+                    <li>Use geometric tools untuk diagram yang presisi</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <h4>📁 Tips File Management</h4>
+                <ul>
+                    <li>Create folder struktur yang konsisten</li>
+                    <li>Use descriptive filenames dengan tanggal</li>
+                    <li>Backup important files secara regular</li>
+                    <li>Keep file sizes reasonable untuk performa optimal</li>
+                    <li>Organize materials by subject atau kategori</li>
+                </ul>
+            </div>
+
+            <h3>🎯 Best Practices</h3>
+            
+            <div class="step">
+                <h4>📚 Untuk Pengajar</h4>
+                <ul>
+                    <li>Prepare materials dalam format yang didukung</li>
+                    <li>Use papan tulis untuk interactive explanations</li>
+                    <li>Leverage dashboard untuk student tracking</li>
+                    <li>Maintain consistent schedule di kalender</li>
+                    <li>Regular backup dari important course materials</li>
+                </ul>
+            </div>
+
+            <div class="step">
+                <h4>👥 Untuk Siswa</h4>
+                <ul>
+                    <li>Explore semua fitur menu untuk familiarization</li>
+                    <li>Use papan tulis untuk note-taking และ problem solving</li>
+                    <li>Organize downloaded materials dengan baik</li>
+                    <li>Manfaatkan kalender untuk deadline tracking</li>
+                    <li>Practice dengan berbagai file types</li>
+                </ul>
+            </div>
+
+            <h3>⚡ Performance Tips</h3>
+            <ul>
+                <li><strong>RAM Management:</strong> Close unused applications saat menggunakan Pendita</li>
+                <li><strong>Storage:</strong> Pastikan adequate free space untuk temporary files</li>
+                <li><strong>Display:</strong> Use recommended screen resolution untuk optimal UI</li>
+                <li><strong>Network:</strong> Stable connection untuk external links (ujian online)</li>
+                <li><strong>Updates:</strong> Keep aplikasi updated untuk bug fixes dan new features</li>
+            </ul>
+
+            <h3>🔒 Tips Keamanan</h3>
+            <div class="warning">
+                <h4>⚠️ Data Security</h4>
+                <ul>
+                    <li>Regular backup important data ke external storage</li>
+                    <li>Avoid opening suspicious files atau links</li>
+                    <li>Keep aplikasi updated untuk security patches</li>
+                    <li>Don't share sensitive course materials publicly</li>
+                    <li>Use strong passwords untuk related accounts</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="footer">
+            <h3>📞 Kontak dan Support</h3>
+            <p>Untuk bantuan lebih lanjut atau feedback tentang aplikasi Pendita:</p>
+            <p><strong>Email:</strong> fauzi.ozillae@gmail.com</p>
+            <p><strong>Aplikasi:</strong> Pendita v1.0.0</p>
+            <p><strong>Platform:</strong> Windows Desktop Application</p>
+            <br>
+            <p><em>Terima kasih telah menggunakan Pendita!</em></p>
+            <p>© 2026 Pendita Education Platform</p>
+        </div>
+    </div>
+</body>
+</html>
