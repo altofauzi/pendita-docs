@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panduan Pengguna - Kopi (Koperasi Simpan Pinjam)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      line-height: 1.7;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100vh;
+      background: #1e293b;
+      color: #e2e8f0;
+      overflow-y: auto;
+      padding: 24px 0;
+      z-index: 100;
+    }
+    .sidebar-header {
+      padding: 0 24px 20px;
+      border-bottom: 1px solid #334155;
+      margin-bottom: 16px;
+    }
+    .sidebar-header h1 {
+      font-size: 1.3em;
+      color: #60a5fa;
+      margin-bottom: 4px;
+    }
+    .sidebar-header p {
+      font-size: 0.78em;
+      color: #94a3b8;
+    }
+    .sidebar nav a {
+      display: block;
+      padding: 8px 24px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.88em;
+      transition: all 0.15s;
+    }
+    .sidebar nav a:hover {
+      background: #334155;
+      color: #60a5fa;
+    }
+    .sidebar nav a.section-title {
+      font-weight: 700;
+      color: #94a3b8;
+      font-size: 0.75em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding-top: 16px;
+      cursor: default;
+    }
+    .sidebar nav a.section-title:hover {
+      background: none;
+      color: #94a3b8;
+    }
+
+    /* Main Content */
+    .main {
+      margin-left: 280px;
+      padding: 40px 48px 80px;
+      max-width: 960px;
+    }
+    .main h1 {
+      font-size: 2em;
+      color: #1e40af;
+      margin-bottom: 8px;
+      padding-bottom: 12px;
+      border-bottom: 3px solid #3b82f6;
+    }
+    .main h2 {
+      font-size: 1.5em;
+      color: #1e3a5f;
+      margin-top: 48px;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #dbeafe;
+    }
+    .main h3 {
+      font-size: 1.15em;
+      color: #1e40af;
+      margin-top: 28px;
+      margin-bottom: 10px;
+    }
+    .main p {
+      margin-bottom: 14px;
+      color: #475569;
+    }
+    .main ul, .main ol {
+      margin-bottom: 16px;
+      padding-left: 24px;
+    }
+    .main li {
+      margin-bottom: 6px;
+      color: #475569;
+    }
+
+    /* Cards */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+      border: 1px solid #e2e8f0;
+    }
+    .card-blue {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+    .card-yellow {
+      background: #fefce8;
+      border-color: #fde68a;
+    }
+    .card-green {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+    .card-red {
+      background: #fef2f2;
+      border-color: #fecaca;
+    }
+
+    /* Badge */
+    .badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.78em;
+      font-weight: 600;
+    }
+    .badge-blue { background: #dbeafe; color: #1e40af; }
+    .badge-green { background: #dcfce7; color: #166534; }
+    .badge-yellow { background: #fef9c3; color: #854d0e; }
+    .badge-red { background: #fee2e2; color: #991b1b; }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 0.92em;
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid #e2e8f0;
+    }
+    th {
+      background: #1e40af;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.88em;
+    }
+    tr:nth-child(even) { background: #f8fafc; }
+    tr:hover { background: #eff6ff; }
+
+    /* Keyboard shortcut */
+    kbd {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.85em;
+      color: #334155;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+
+    /* Code */
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Consolas', monospace;
+      font-size: 0.88em;
+      color: #1e40af;
+    }
+
+    /* Steps */
+    .steps {
+      counter-reset: step-counter;
+      list-style: none;
+      padding-left: 0;
+    }
+    .steps li {
+      counter-increment: step-counter;
+      position: relative;
+      padding-left: 48px;
+      margin-bottom: 18px;
+    }
+    .steps li::before {
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      background: #3b82f6;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.88em;
+    }
+
+    /* Screenshot placeholder */
+    .screenshot {
+      background: #e2e8f0;
+      border: 2px dashed #94a3b8;
+      border-radius: 8px;
+      padding: 40px;
+      text-align: center;
+      color: #64748b;
+      font-size: 0.88em;
+      margin: 16px 0;
+    }
+
+    /* Tip / Warning / Info */
+    .tip, .warning, .info {
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin: 16px 0;
+      font-size: 0.92em;
+    }
+    .tip {
+      background: #f0fdf4;
+      border-left: 4px solid #22c55e;
+      color: #166534;
+    }
+    .warning {
+      background: #fefce8;
+      border-left: 4px solid #eab308;
+      color: #854d0e;
+    }
+    .info {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      color: #1e40af;
+    }
+
+    /* Print */
+    @media print {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; padding: 20px 16px; }
+    }
+
+    /* Footer */
+    .doc-footer {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 2px solid #e2e8f0;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 0.82em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+  <div class="sidebar-header">
+    <h1>Kopi</h1>
+    <p>Panduan Pengguna v1.0.0</p>
+  </div>
+  <nav>
+    <a href="#pendahuluan">Pendahuluan</a>
+    <a href="#instalasi">Instalasi</a>
+    <a href="#login">Login</a>
+
+    <a class="section-title">Keanggotaan</a>
+    <a href="#anggota">Daftar Anggota</a>
+    <a href="#tambah-anggota">Tambah Anggota</a>
+    <a href="#buku-anggota">Buku Anggota</a>
+    <a href="#cashier">Cashier</a>
+
+    <a class="section-title">Simpanan</a>
+    <a href="#simpanan">Lihat Simpanan</a>
+    <a href="#tambah-simpanan">Form Simpanan</a>
+
+    <a class="section-title">Pinjaman</a>
+    <a href="#pinjaman">Lihat Pinjaman</a>
+    <a href="#tambah-pinjaman">Form Pinjaman</a>
+    <a href="#bayar-pinjaman">Bayar Pinjaman</a>
+
+    <a class="section-title">Laporan</a>
+    <a href="#laporan">Laporan</a>
+
+    <a class="section-title">Pengaturan</a>
+    <a href="#pengaturan">Pengaturan Aplikasi</a>
+    <a href="#akun">Pengaturan Akun</a>
+    <a href="#password">Ganti Password</a>
+    <a href="#dark-mode">Dark Mode</a>
+
+    <a class="section-title">Lisensi</a>
+    <a href="#trial">Masa Trial</a>
+    <a href="#aktivasi">Aktivasi Lisensi</a>
+
+    <a class="section-title">Lainnya</a>
+    <a href="#shortcut">Keyboard Shortcut</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</div>
+
+<!-- Main Content -->
+<div class="main">
+
+  <!-- PENDAHULUAN -->
+  <h1 id="pendahuluan">Panduan Pengguna Kopi</h1>
+  <p>Selamat datang di panduan pengguna aplikasi <strong>Kopi</strong> (Koperasi Simpan Pinjam). Panduan ini akan membantu Anda memahami cara menggunakan seluruh fitur yang tersedia.</p>
+
+  <div class="card card-blue">
+    <strong>Apa itu Kopi?</strong>
+    <p style="margin-top:8px; margin-bottom:0;">Kopi adalah aplikasi desktop untuk manajemen koperasi simpan pinjam. Dibangun menggunakan teknologi Electron + React, mendukung pengelolaan anggota, simpanan, pinjaman, pembayaran cicilan, dan pelaporan.</p>
+  </div>
+
+  <h3>Fitur Utama</h3>
+  <ul>
+    <li>Manajemen data anggota koperasi</li>
+    <li>Pencatatan simpanan (Pokok, Wajib, Sukarela)</li>
+    <li>Pengelolaan pinjaman dan jadwal cicilan otomatis</li>
+    <li>Pembayaran pinjaman dengan tracking status</li>
+    <li>Buku tabungan digital per anggota</li>
+    <li>Cetak laporan dalam format PDF</li>
+    <li>Dark mode</li>
+    <li>Sistem lisensi dengan aktivasi product key</li>
+  </ul>
+
+  <!-- INSTALASI -->
+  <h2 id="instalasi">Instalasi</h2>
+
+  <h3>Kebutuhan Sistem</h3>
+  <table>
+    <tr><th>Komponen</th><th>Minimum</th></tr>
+    <tr><td>Sistem Operasi</td><td>Windows 10 / 11 (64-bit)</td></tr>
+    <tr><td>RAM</td><td>4 GB</td></tr>
+    <tr><td>Disk</td><td>200 MB ruang kosong</td></tr>
+    <tr><td>Layar</td><td>1024 x 768</td></tr>
+  </table>
+
+  <h3>Langkah Instalasi</h3>
+  <ol class="steps">
+    <li>Download file installer Kopi dari sumber yang diberikan.</li>
+    <li>Jalankan file installer (<code>Kopi-Setup.exe</code>).</li>
+    <li>Ikuti langkah instalasi hingga selesai.</li>
+    <li>Buka aplikasi Kopi dari desktop atau Start Menu.</li>
+    <li>Aplikasi akan otomatis dalam mode <strong>Trial 30 hari</strong> dengan fitur lengkap.</li>
+  </ol>
+
+  <!-- LOGIN -->
+  <h2 id="login">Login</h2>
+  <p>Saat pertama kali dibuka, aplikasi menampilkan halaman login.</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Akun Default</h3>
+    <table>
+      <tr><th>Field</th><th>Nilai</th></tr>
+      <tr><td>Username</td><td><code>admin</code></td></tr>
+      <tr><td>Password</td><td><code>kopimanis</code></td></tr>
+      <tr><td>Role</td><td><span class="badge badge-blue">admin</span></td></tr>
+    </table>
+  </div>
+
+  <div class="warning">
+    <strong>Penting:</strong> Segera ubah password default setelah login pertama melalui menu <strong>Pengaturan &gt; Pengaturan Password</strong>.
+  </div>
+
+  <h3>Langkah Login</h3>
+  <ol class="steps">
+    <li>Masukkan <strong>Username</strong> dan <strong>Password</strong>.</li>
+    <li>Klik tombol <strong>Login</strong>.</li>
+    <li>Jika berhasil, Anda akan masuk ke halaman <strong>Dashboard</strong>.</li>
+    <li>Jika gagal, periksa kembali username dan password Anda.</li>
+  </ol>
+
+  <!-- ANGGOTA -->
+  <h2 id="anggota">Daftar Anggota</h2>
+  <p>Menu ini menampilkan seluruh data anggota koperasi yang terdaftar.</p>
+
+  <p>Akses melalui: <strong>Menu Keanggotaan &gt; Daftar Anggota</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>A</kbd></p>
+
+  <h3>Fitur yang Tersedia</h3>
+  <ul>
+    <li><strong>Lihat</strong> &mdash; Melihat detail data anggota</li>
+    <li><strong>Edit</strong> &mdash; Mengubah data anggota</li>
+    <li><strong>Hapus</strong> &mdash; Menghapus anggota dari sistem</li>
+    <li><strong>Cari</strong> &mdash; Mencari anggota berdasarkan nama atau kode</li>
+    <li><strong>Ringkasan Akun</strong> &mdash; Melihat total tabungan, simpanan, dan pinjaman anggota</li>
+  </ul>
+
+  <h3>Status Anggota</h3>
+  <table>
+    <tr><th>Status</th><th>Keterangan</th></tr>
+    <tr><td><span class="badge badge-green">Aktif</span></td><td>Anggota aktif, dapat melakukan transaksi</td></tr>
+    <tr><td><span class="badge badge-yellow">Nonaktif</span></td><td>Anggota tidak aktif sementara</td></tr>
+    <tr><td><span class="badge badge-red">Blocked</span></td><td>Anggota diblokir dari sistem</td></tr>
+  </table>
+
+  <h3>Jabatan Anggota</h3>
+  <table>
+    <tr><th>Jabatan</th><th>Keterangan</th></tr>
+    <tr><td>Anggota</td><td>Anggota biasa</td></tr>
+    <tr><td>Pengurus</td><td>Bagian kepengurusan</td></tr>
+    <tr><td>Ketua</td><td>Ketua koperasi</td></tr>
+    <tr><td>Sekretaris</td><td>Sekretaris koperasi</td></tr>
+    <tr><td>Bendahara</td><td>Bendahara koperasi</td></tr>
+  </table>
+
+  <!-- TAMBAH ANGGOTA -->
+  <h2 id="tambah-anggota">Tambah Anggota</h2>
+  <p>Akses melalui: <strong>Menu Keanggotaan &gt; Tambah Anggota</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>N</kbd></p>
+
+  <h3>Data yang Diisi</h3>
+  <table>
+    <tr><th>Field</th><th>Wajib</th><th>Keterangan</th></tr>
+    <tr><td>Nama</td><td>Ya</td><td>Nama lengkap anggota</td></tr>
+    <tr><td>Kode Anggota</td><td>Ya</td><td>Kode unik anggota (tidak boleh duplikat)</td></tr>
+    <tr><td>Alamat</td><td>Tidak</td><td>Alamat lengkap</td></tr>
+    <tr><td>Telepon</td><td>Ya</td><td>Nomor telepon aktif</td></tr>
+    <tr><td>Jabatan</td><td>Ya</td><td>Pilih jabatan</td></tr>
+    <tr><td>Status</td><td>Ya</td><td>Aktif / Nonaktif / Blocked</td></tr>
+  </table>
+
+  <!-- BUKU ANGGOTA -->
+  <h2 id="buku-anggota">Buku Anggota</h2>
+  <p>Buku anggota adalah rekening digital yang dimiliki setiap anggota. Setiap anggota bisa memiliki beberapa buku untuk jenis yang berbeda.</p>
+
+  <p>Akses melalui: <strong>Menu Keanggotaan &gt; Buku Anggota</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>B</kbd></p>
+
+  <h3>Jenis Buku</h3>
+  <table>
+    <tr><th>Jenis</th><th>Keterangan</th></tr>
+    <tr><td><span class="badge badge-blue">Tabungan</span></td><td>Buku untuk mencatat setoran dan penarikan tabungan</td></tr>
+    <tr><td><span class="badge badge-yellow">Pinjaman</span></td><td>Buku untuk mencatat pinjaman</td></tr>
+  </table>
+
+  <div class="tip">
+    <strong>Tips:</strong> Pastikan anggota sudah memiliki buku sebelum melakukan transaksi simpanan.
+  </div>
+
+  <!-- CASHIER -->
+  <h2 id="cashier">Cashier</h2>
+  <p>Menu untuk mengelola data kasir/teller yang melayani transaksi.</p>
+  <p>Akses melalui: <strong>Menu Keanggotaan &gt; Cashier</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>C</kbd></p>
+
+  <h3>Data Cashier</h3>
+  <table>
+    <tr><th>Field</th><th>Keterangan</th></tr>
+    <tr><td>Nama</td><td>Nama kasir</td></tr>
+    <tr><td>Kode Cashier</td><td>Kode unik kasir</td></tr>
+    <tr><td>Keterangan</td><td>Catatan tambahan</td></tr>
+    <tr><td>Status</td><td>Aktif / Nonaktif</td></tr>
+  </table>
+
+  <!-- SIMPANAN -->
+  <h2 id="simpanan">Lihat Simpanan</h2>
+  <p>Menampilkan seluruh data transaksi simpanan anggota koperasi.</p>
+  <p>Akses melalui: <strong>Menu Simpanan &gt; Lihat Simpanan</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd></p>
+
+  <h3>Jenis Simpanan</h3>
+  <table>
+    <tr><th>Jenis</th><th>Keterangan</th></tr>
+    <tr><td><span class="badge badge-blue">Pokok</span></td><td>Simpanan wajib saat pertama kali menjadi anggota</td></tr>
+    <tr><td><span class="badge badge-green">Wajib</span></td><td>Simpanan rutin yang wajib dibayarkan setiap periode</td></tr>
+    <tr><td><span class="badge badge-yellow">Sukarela</span></td><td>Simpanan tambahan yang bersifat fleksibel</td></tr>
+  </table>
+
+  <h3>Tipe Transaksi</h3>
+  <table>
+    <tr><th>Tipe</th><th>Keterangan</th></tr>
+    <tr><td><span class="badge badge-green">Masuk</span></td><td>Setoran / penambahan simpanan</td></tr>
+    <tr><td><span class="badge badge-red">Keluar</span></td><td>Penarikan simpanan (saldo harus mencukupi)</td></tr>
+  </table>
+
+  <!-- TAMBAH SIMPANAN -->
+  <h2 id="tambah-simpanan">Form Simpanan</h2>
+  <p>Akses melalui: <strong>Menu Simpanan &gt; Form Simpanan</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>E</kbd></p>
+
+  <h3>Langkah Menambah Simpanan</h3>
+  <ol class="steps">
+    <li>Pilih <strong>Anggota</strong> dari daftar.</li>
+    <li>Pilih <strong>Buku</strong> yang akan digunakan.</li>
+    <li>Pilih <strong>Jenis Simpanan</strong> (Pokok / Wajib / Sukarela).</li>
+    <li>Pilih <strong>Tipe</strong> (Masuk / Keluar).</li>
+    <li>Masukkan <strong>Jumlah</strong> nominal.</li>
+    <li>Isi <strong>Keterangan</strong> jika perlu.</li>
+    <li>Klik <strong>Simpan</strong>.</li>
+  </ol>
+
+  <div class="info">
+    <strong>Info:</strong> Setiap transaksi simpanan otomatis membuat record mutasi tabungan dan memperbarui saldo buku.
+  </div>
+
+  <!-- PINJAMAN -->
+  <h2 id="pinjaman">Lihat Pinjaman</h2>
+  <p>Menampilkan seluruh data pinjaman anggota.</p>
+  <p>Akses melalui: <strong>Menu Pinjaman &gt; Lihat Pinjaman</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F</kbd></p>
+
+  <h3>Status Pinjaman</h3>
+  <table>
+    <tr><th>Status</th><th>Keterangan</th></tr>
+    <tr><td><span class="badge badge-green">Aktif</span></td><td>Pinjaman masih berjalan, ada cicilan yang belum lunas</td></tr>
+    <tr><td><span class="badge badge-blue">Lunas</span></td><td>Semua cicilan sudah dibayar</td></tr>
+    <tr><td><span class="badge badge-red">Macet</span></td><td>Pinjaman bermasalah</td></tr>
+  </table>
+
+  <h3>Detail Pinjaman</h3>
+  <p>Klik pada baris pinjaman untuk melihat detail yang mencakup:</p>
+  <ul>
+    <li>Informasi pinjaman (nomor, jumlah, tenor, bunga)</li>
+    <li>Jadwal cicilan per bulan</li>
+    <li>Status pembayaran setiap cicilan</li>
+    <li>Tanggal jatuh tempo</li>
+  </ul>
+
+  <!-- TAMBAH PINJAMAN -->
+  <h2 id="tambah-pinjaman">Form Pinjaman</h2>
+  <p>Akses melalui: <strong>Menu Pinjaman &gt; Form Pinjaman</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>G</kbd></p>
+
+  <h3>Langkah Membuat Pinjaman Baru</h3>
+  <ol class="steps">
+    <li>Pilih <strong>Anggota</strong> peminjam.</li>
+    <li>Masukkan <strong>Jumlah Pinjaman</strong> (pokok pinjaman).</li>
+    <li>Masukkan <strong>Tenor</strong> (lama cicilan dalam bulan).</li>
+    <li>Masukkan <strong>Bunga</strong> (persentase bunga).</li>
+    <li>Klik <strong>Simpan</strong>.</li>
+  </ol>
+
+  <div class="info">
+    <strong>Info:</strong> Sistem otomatis membuat jadwal cicilan per bulan. Setiap cicilan terdiri dari pokok + bunga. Tanggal jatuh tempo dihitung ke akhir bulan.
+  </div>
+
+  <h3>Rumus Perhitungan</h3>
+  <div class="card">
+    <table>
+      <tr><th>Komponen</th><th>Rumus</th></tr>
+      <tr><td>Cicilan Pokok</td><td>Jumlah Pinjaman &divide; Tenor</td></tr>
+      <tr><td>Cicilan Bunga</td><td>(Jumlah Pinjaman &times; Bunga%) &divide; Tenor</td></tr>
+      <tr><td>Total per Bulan</td><td>Cicilan Pokok + Cicilan Bunga</td></tr>
+    </table>
+  </div>
+
+  <!-- BAYAR PINJAMAN -->
+  <h2 id="bayar-pinjaman">Bayar Pinjaman</h2>
+  <p>Akses melalui: <strong>Menu Pinjaman &gt; Bayar Pinjaman</strong> atau tekan <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>H</kbd></p>
+
+  <h3>Langkah Pembayaran</h3>
+  <ol class="steps">
+    <li>Buka <strong>Form Bayar Pinjaman</strong> (<kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>J</kbd>).</li>
+    <li>Pilih <strong>Pinjaman</strong> yang akan dibayar.</li>
+    <li>Pilih <strong>Cicilan</strong> yang akan dilunasi (bisa lebih dari satu).</li>
+    <li>Pilih <strong>Metode Pembayaran</strong> (Cash / Transfer / E-Wallet).</li>
+    <li>Isi data <strong>Cashier</strong> dan <strong>Dibayar Oleh</strong>.</li>
+    <li>Klik <strong>Proses Pembayaran</strong>.</li>
+  </ol>
+
+  <div class="tip">
+    <strong>Tips:</strong> Nomor slip pembayaran otomatis di-generate oleh sistem dengan format <code>BP-YYYYMMDD-XXXX</code>.
+  </div>
+
+  <div class="info">
+    <strong>Info:</strong> Jika semua cicilan sudah lunas, status pinjaman otomatis berubah menjadi <span class="badge badge-blue">Lunas</span>.
+  </div>
+
+  <!-- LAPORAN -->
+  <h2 id="laporan">Laporan</h2>
+  <p>Aplikasi menyediakan 4 jenis laporan yang dapat difilter dan dicetak ke PDF.</p>
+
+  <h3>Jenis Laporan</h3>
+  <table>
+    <tr><th>Laporan</th><th>Shortcut</th><th>Keterangan</th></tr>
+    <tr><td>Laporan Simpanan</td><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd></td><td>Rekap transaksi simpanan masuk & keluar</td></tr>
+    <tr><td>Laporan Pinjaman</td><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>M</kbd></td><td>Rekap pinjaman aktif, lunas, dan outstanding</td></tr>
+    <tr><td>Laporan Bayar Pinjaman</td><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>O</kbd></td><td>Rekap pembayaran cicilan</td></tr>
+    <tr><td>Laporan Anggota</td><td><kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>K</kbd></td><td>Rekap data anggota berdasarkan status/jabatan</td></tr>
+  </table>
+
+  <h3>Filter Laporan</h3>
+  <p>Setiap laporan dapat difilter berdasarkan:</p>
+  <ul>
+    <li><strong>Tanggal</strong> &mdash; Rentang tanggal awal dan akhir</li>
+    <li><strong>Nama</strong> &mdash; Pencarian berdasarkan nama anggota</li>
+    <li><strong>Status / Jenis / Metode</strong> &mdash; Filter spesifik per jenis laporan</li>
+  </ul>
+
+  <h3>Cetak ke PDF</h3>
+  <p>Gunakan <kbd>Ctrl</kbd> + <kbd>P</kbd> untuk mencetak halaman yang sedang aktif ke format PDF.</p>
+
+  <!-- PENGATURAN -->
+  <h2 id="pengaturan">Pengaturan Aplikasi</h2>
+  <p>Hanya tersedia untuk pengguna dengan role <span class="badge badge-blue">admin</span>.</p>
+  <p>Akses melalui: <strong>Menu Pengaturan &gt; Pengaturan Aplikasi</strong></p>
+
+  <h3>Data yang Dapat Diubah</h3>
+  <table>
+    <tr><th>Field</th><th>Keterangan</th></tr>
+    <tr><td>Nama Koperasi</td><td>Nama resmi koperasi</td></tr>
+    <tr><td>Slogan</td><td>Slogan/tagline koperasi</td></tr>
+    <tr><td>Alamat</td><td>Alamat lengkap kantor</td></tr>
+    <tr><td>Kabupaten</td><td>Kabupaten/Kota</td></tr>
+    <tr><td>Telepon</td><td>Nomor telepon kantor</td></tr>
+    <tr><td>Bunga Pinjam (%)</td><td>Persentase bunga default</td></tr>
+    <tr><td>Logo</td><td>Upload logo koperasi (PNG/JPG)</td></tr>
+  </table>
+
+  <h3>Info Lisensi</h3>
+  <p>Di bagian bawah halaman Pengaturan terdapat section <strong>Lisensi</strong> yang menampilkan:</p>
+  <ul>
+    <li>Status lisensi saat ini (Berlisensi / Trial / Trial Habis)</li>
+    <li>Detail product key dan email (jika sudah berlisensi)</li>
+    <li>Sisa hari trial (jika dalam mode trial)</li>
+    <li>Tombol <strong>Aktivasi Lisensi</strong> untuk membuka halaman aktivasi</li>
+  </ul>
+
+  <!-- AKUN -->
+  <h2 id="akun">Pengaturan Akun</h2>
+  <p>Akses melalui: <strong>Menu Pengaturan &gt; Pengaturan Akun</strong></p>
+  <p>Di sini Anda dapat mengubah:</p>
+  <ul>
+    <li>Nama lengkap</li>
+    <li>Email</li>
+    <li>Nomor telepon</li>
+  </ul>
+
+  <!-- PASSWORD -->
+  <h2 id="password">Ganti Password</h2>
+  <p>Akses melalui: <strong>Menu Pengaturan &gt; Pengaturan Password</strong></p>
+
+  <ol class="steps">
+    <li>Masukkan <strong>Password Lama</strong>.</li>
+    <li>Masukkan <strong>Password Baru</strong>.</li>
+    <li>Masukkan ulang <strong>Konfirmasi Password Baru</strong>.</li>
+    <li>Klik <strong>Simpan</strong>.</li>
+  </ol>
+
+  <div class="warning">
+    <strong>Perhatian:</strong> Password lama harus benar. Jika salah, perubahan akan ditolak.
+  </div>
+
+  <!-- DARK MODE -->
+  <h2 id="dark-mode">Dark Mode</h2>
+  <p>Kopi mendukung tampilan dark mode untuk kenyamanan penggunaan di lingkungan minim cahaya.</p>
+
+  <h3>Cara Mengaktifkan</h3>
+  <p>Klik ikon <strong>bulan/matahari</strong> di pojok kanan atas header.</p>
+  <ul>
+    <li>Ikon bulan = mode terang aktif (klik untuk pindah ke dark)</li>
+    <li>Ikon matahari = mode gelap aktif (klik untuk pindah ke terang)</li>
+  </ul>
+
+  <div class="tip">
+    <strong>Tips:</strong> Preferensi tema tersimpan otomatis dan akan digunakan kembali saat aplikasi dibuka.
+  </div>
+
+  <!-- TRIAL -->
+  <h2 id="trial">Masa Trial</h2>
+  <p>Saat pertama kali diinstall, aplikasi berada dalam mode <strong>Trial 30 hari</strong>.</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Selama Masa Trial</h3>
+    <ul>
+      <li>Semua fitur tersedia tanpa batasan</li>
+      <li>Banner trial muncul di bagian atas aplikasi</li>
+      <li>Banner berwarna <span class="badge badge-yellow">kuning</span> jika sisa &gt; 7 hari</li>
+      <li>Banner berwarna <span class="badge badge-red">merah</span> jika sisa &le; 7 hari</li>
+      <li>Banner dapat ditutup (dismiss) oleh pengguna</li>
+    </ul>
+  </div>
+
+  <div class="card card-red">
+    <h3 style="margin-top:0">Setelah Trial Habis</h3>
+    <ul style="margin-bottom:0">
+      <li>Aplikasi <strong>terblokir</strong> &mdash; tidak bisa mengakses fitur apapun</li>
+      <li>Halaman <strong>Aktivasi Lisensi</strong> tampil otomatis</li>
+      <li>Pengguna harus melakukan aktivasi product key untuk melanjutkan</li>
+    </ul>
+  </div>
+
+  <!-- AKTIVASI -->
+  <h2 id="aktivasi">Aktivasi Lisensi</h2>
+  <p>Aktivasi lisensi diperlukan setelah masa trial berakhir, atau dapat dilakukan kapan saja melalui menu <strong>Pengaturan &gt; Aktivasi Lisensi</strong>.</p>
+
+  <h3>Langkah Aktivasi</h3>
+  <ol class="steps">
+    <li>
+      <strong>Salin Hardware ID</strong><br>
+      Buka halaman Aktivasi. Hardware ID unik perangkat Anda akan ditampilkan. Klik tombol <strong>Salin</strong> untuk menyalin ke clipboard.
+    </li>
+    <li>
+      <strong>Hubungi Penjual</strong><br>
+      Kirimkan <strong>Hardware ID</strong> + <strong>email aktif</strong> Anda ke penjual/developer melalui WhatsApp, email, atau media lainnya. Sertakan bukti pembayaran jika diperlukan.
+    </li>
+    <li>
+      <strong>Terima Product Key</strong><br>
+      Penjual akan mengirimkan product key dengan format: <code>KOPI-XXXX-XXXX-XXXX-XXXX</code>
+    </li>
+    <li>
+      <strong>Masukkan Product Key</strong><br>
+      Di halaman Aktivasi, masukkan product key dan email Anda. Key akan di-format otomatis (huruf besar + dash).
+    </li>
+    <li>
+      <strong>Klik Aktivasi</strong><br>
+      Sistem akan memvalidasi ke server. Jika berhasil, aplikasi langsung bisa digunakan.
+    </li>
+  </ol>
+
+  <div class="warning">
+    <strong>Perhatian:</strong> Aktivasi memerlukan koneksi internet. Pastikan perangkat terhubung ke internet saat proses aktivasi.
+  </div>
+
+  <h3>Aturan Lisensi</h3>
+  <div class="card">
+    <table>
+      <tr><th>Aturan</th><th>Keterangan</th></tr>
+      <tr><td>1 Key = 1 Device</td><td>Satu product key hanya bisa digunakan di satu perangkat</td></tr>
+      <tr><td>1 Email = 1 Device</td><td>Satu email hanya bisa terdaftar untuk satu perangkat</td></tr>
+      <tr><td>Re-validasi</td><td>Sistem melakukan pengecekan otomatis setiap 30 hari</td></tr>
+      <tr><td>Pindah Device</td><td>Hubungi penjual untuk memindahkan lisensi ke perangkat baru</td></tr>
+    </table>
+  </div>
+
+  <h3>Kemungkinan Error Saat Aktivasi</h3>
+  <table>
+    <tr><th>Pesan Error</th><th>Penyebab</th><th>Solusi</th></tr>
+    <tr>
+      <td>Format product key tidak valid</td>
+      <td>Key tidak sesuai format</td>
+      <td>Periksa kembali key yang dimasukkan</td>
+    </tr>
+    <tr>
+      <td>Product key sudah digunakan di perangkat lain</td>
+      <td>Key sudah diaktivasi di device lain</td>
+      <td>Hubungi penjual untuk mendapatkan key baru atau reset</td>
+    </tr>
+    <tr>
+      <td>Email sudah terdaftar di perangkat lain</td>
+      <td>Email sudah dipakai aktivasi di device lain</td>
+      <td>Gunakan email berbeda atau hubungi penjual</td>
+    </tr>
+    <tr>
+      <td>Tidak dapat terhubung ke server</td>
+      <td>Tidak ada koneksi internet</td>
+      <td>Periksa koneksi internet dan coba lagi</td>
+    </tr>
+  </table>
+
+  <!-- KEYBOARD SHORTCUT -->
+  <h2 id="shortcut">Keyboard Shortcut</h2>
+  <p>Berikut daftar shortcut yang tersedia untuk navigasi cepat:</p>
+
+  <h3>File</h3>
+  <table>
+    <tr><th>Shortcut</th><th>Fungsi</th></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>D</kbd></td><td>Dashboard</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>P</kbd></td><td>Print / Cetak PDF</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Q</kbd></td><td>Keluar aplikasi</td></tr>
+    <tr><td><kbd>F11</kbd></td><td>Fullscreen</td></tr>
+  </table>
+
+  <h3>Keanggotaan</h3>
+  <table>
+    <tr><th>Shortcut</th><th>Fungsi</th></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>A</kbd></td><td>Daftar Anggota</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>N</kbd></td><td>Tambah Anggota</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>B</kbd></td><td>Buku Anggota</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>C</kbd></td><td>Cashier</td></tr>
+  </table>
+
+  <h3>Simpanan</h3>
+  <table>
+    <tr><th>Shortcut</th><th>Fungsi</th></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>D</kbd></td><td>Lihat Simpanan</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>E</kbd></td><td>Form Simpanan</td></tr>
+  </table>
+
+  <h3>Pinjaman</h3>
+  <table>
+    <tr><th>Shortcut</th><th>Fungsi</th></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>F</kbd></td><td>Lihat Pinjaman</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>G</kbd></td><td>Form Pinjaman</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>H</kbd></td><td>Bayar Pinjaman</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>J</kbd></td><td>Form Bayar Pinjaman</td></tr>
+  </table>
+
+  <h3>Laporan</h3>
+  <table>
+    <tr><th>Shortcut</th><th>Fungsi</th></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>L</kbd></td><td>Laporan Simpanan</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>M</kbd></td><td>Laporan Pinjaman</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>O</kbd></td><td>Laporan Bayar Pinjaman</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>K</kbd></td><td>Laporan Anggota</td></tr>
+  </table>
+
+  <h3>Pengaturan & Lainnya</h3>
+  <table>
+    <tr><th>Shortcut</th><th>Fungsi</th></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd></td><td>Profil</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>I</kbd></td><td>About</td></tr>
+    <tr><td><kbd>Ctrl</kbd> + <kbd>H</kbd></td><td>Support</td></tr>
+  </table>
+
+  <!-- FAQ -->
+  <h2 id="faq">FAQ (Pertanyaan Umum)</h2>
+
+  <div class="card">
+    <h3 style="margin-top:0">Bagaimana cara menambah user baru?</h3>
+    <p style="margin-bottom:0">Saat ini user hanya bisa ditambahkan melalui database. Hubungi administrator untuk penambahan user baru.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Bagaimana jika lupa password?</h3>
+    <p style="margin-bottom:0">Hubungi administrator untuk mereset password melalui database.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Apakah data tersimpan di cloud?</h3>
+    <p style="margin-bottom:0">Tidak. Semua data tersimpan secara lokal di komputer Anda dalam file SQLite. Pastikan melakukan backup secara berkala.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Bagaimana cara backup data?</h3>
+    <p style="margin-bottom:0">Salin file <code>kopi.sqlite</code> dari folder aplikasi ke lokasi backup Anda. File ini berisi seluruh data koperasi.</p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Bagaimana jika ingin pindah komputer?</h3>
+    <p style="margin-bottom:0">
+      1. Salin file <code>kopi.sqlite</code> ke komputer baru.<br>
+      2. Install aplikasi Kopi di komputer baru.<br>
+      3. Hubungi penjual untuk memindahkan lisensi ke Hardware ID baru.<br>
+      4. Aktivasi ulang dengan product key yang sama.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Apakah perlu koneksi internet?</h3>
+    <p style="margin-bottom:0">
+      Koneksi internet hanya diperlukan saat:<br>
+      &bull; Aktivasi lisensi (pertama kali)<br>
+      &bull; Re-validasi lisensi (setiap 30 hari, otomatis)<br>
+      <br>
+      Untuk penggunaan sehari-hari, aplikasi dapat digunakan secara offline.
+    </p>
+  </div>
+
+  <!-- Footer -->
+  <div class="doc-footer">
+    <p>&copy; 2026 Kopi - Digital Purwo Sejati. All rights reserved.</p>
+    <p>Panduan Pengguna Versi 1.0.0</p>
+  </div>
+
+</div>
+
+</body>
+</html>
